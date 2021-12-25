@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Image Finder</title>
-    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/1.0.0/modern-normalize.min.css"
@@ -14,14 +14,11 @@
   </head>
   <body>
     <form class="search-form" id="search-form">
-      <input
-        type="text"
-        name="searchQuery"
-        autocomplete="off"
-        placeholder="Search images..."
-      />
+      <input type="text" name="searchQuery" autocomplete="off" placeholder="Search images..." />
       <button type="submit">Search</button>
     </form>
+    <div class="gallery"></div>
+    <button type="button" class="load-more hidden">Load more</button>
     <script src="./index.js"></script>
     <script src="./PixabayAPI.js"></script>
   </body>

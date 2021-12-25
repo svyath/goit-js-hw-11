@@ -12,15 +12,12 @@ export default class API_service {
     this.imageOnPage = 40;
   }
 
-  fetchData() {
-    axios
-      .get(
-        `https://pixabay.com/api/?key=${API_KEY}&q=${this.searchQuery}&image_type=${imageType}&orientation=${orientation}&safesearch=${safeSearch}`,
-      )
-      .then(response => {
-        this.page += 1;
-        return response.data;
-      });
+  async fetchData() {
+    const response = await axios.get(
+      `https://pixabay.com/api/?key=${API_KEY}&q=${this.searchQuery}&image_type=${imageType}&orientation=${orientation}&safesearch=${safeSearch}`,
+    );
+    this.page += 1;
+    return response.data;
   }
 
   resetPage() {
