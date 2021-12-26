@@ -69,7 +69,7 @@ const loadMoreData = () => {
     renderData(hits);
     lightbox.refresh();
     counter += hits.length;
-
+    pageScroll();
     if (counter >= totalHits) {
       Notify.warning('We are sorry, but you have reached the end of search results.');
       loadMoreBtn.classList.add('hidden');
@@ -78,3 +78,14 @@ const loadMoreData = () => {
 };
 
 loadMoreBtn.addEventListener('click', loadMoreData);
+
+const pageScroll = () => {
+  const { height: cardHeight } = document
+  .querySelector(".gallery")
+  .firstElementChild.getBoundingClientRect();
+
+window.scrollBy({
+  top: cardHeight * 2,
+  behavior: "smooth",
+});
+}
