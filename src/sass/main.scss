@@ -52,11 +52,19 @@ body {
 .photo-card {
   margin: 12px;
   display: block;
+  overflow: hidden;
   box-shadow: 6px 0px 32px #000000cc;
+  border-radius: 10px;
+
+  &:hover{
+    transform: scale(1.05);
+    transition: linear 0.1s;
+  }
 }
 
 .photo-card img {
   display: block;
+  object-fit: cover;
   width: 300px;
   height: 200px;
 }

@@ -65,12 +65,23 @@ body {
 .photo-card {
   margin: 12px;
   display: block;
+  overflow: hidden;
   -webkit-box-shadow: 6px 0px 32px #000000cc;
           box-shadow: 6px 0px 32px #000000cc;
+  border-radius: 10px;
+}
+
+.photo-card:hover {
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+  -webkit-transition: linear 0.1s;
+  transition: linear 0.1s;
 }
 
 .photo-card img {
   display: block;
+  -o-object-fit: cover;
+     object-fit: cover;
   width: 300px;
   height: 200px;
 }
