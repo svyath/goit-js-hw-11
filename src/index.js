@@ -60,7 +60,7 @@ const renderData = array => {
       </p>
     </div>
   </div>`;
-  })
+  });
   gallery.insertAdjacentHTML('beforeEnd', renderedItems);
 };
 
@@ -71,10 +71,10 @@ const loadMoreData = () => {
     counter += hits.length;
 
     if (counter >= totalHits) {
+      Notify.warning('We are sorry, but you have reached the end of search results.');
       loadMoreBtn.classList.add('hidden');
-      return Notify.warning('We are sorry, but you have reached the end of search results.');
     }
   });
-}
+};
 
 loadMoreBtn.addEventListener('click', loadMoreData);
