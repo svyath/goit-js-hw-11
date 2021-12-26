@@ -16,10 +16,12 @@
   <body>
     <form class="search-form" id="search-form">
       <input type="text" name="searchQuery" autocomplete="off" placeholder="Search images..." />
-      <button type="submit">Search</button>
+      <button type="submit" class="btn">Search</button>
     </form>
     <div class="gallery"></div>
-    <button type="button" class="load-more hidden">Load more</button>
+    <div class="container">
+      <button type="button" class="load-more btn hidden">Load more</button>
+    </div>
     <script src="./index.js"></script>
     <script src="./PixabayAPI.js"></script>
   </body>
