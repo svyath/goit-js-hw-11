@@ -10,6 +10,7 @@ const loadMoreBtn = document.querySelector('.load-more');
 
 const Pixabay = new API_service();
 const lightbox = new SimpleLightbox('.gallery a');
+let counter = 0;
 
 const searchRequest = event => {
   event.preventDefault();
@@ -19,7 +20,10 @@ const searchRequest = event => {
     loadMoreBtn.classList.add('hidden');
     return Notify.failure('Search field can not be empty!');
   } else {
+    gallery.innerHTML = '';
+    Pixabay.resetPage();
     Pixabay.fetchData().then(({ totalHits, hits }) => {
+      counter += hits.length;
       if (totalHits === 0) {
         return Notify.failure(
           'Sorry, there are no images matching your search query. Please try again.',
@@ -28,6 +32,7 @@ const searchRequest = event => {
         renderData(hits);
         lightbox.refresh();
         loadMoreBtn.classList.remove('hidden');
+
         return Notify.success(`Hooray! We found ${totalHits} images.`);
       }
     });
@@ -55,10 +60,21 @@ const renderData = array => {
       </p>
     </div>
   </div>`;
-  });
+  })
   gallery.insertAdjacentHTML('beforeEnd', renderedItems);
 };
 
+const loadMoreData = () => {
+  Pixabay.fetchData().then(({ totalHits, hits }) => {
+    renderData(hits);
+    lightbox.refresh();
+    counter += hits.length;
 
+    if (counter >= totalHits) {
+      loadMoreBtn.classList.add('hidden');
+      return Notify.warning('We are sorry, but you have reached the end of search results.');
+    }
+  });
+}
 
 loadMoreBtn.addEventListener('click', loadMoreData);
