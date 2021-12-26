@@ -2,14 +2,14 @@ import './sass/main';
 import API_service from './PixabayAPI';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import SimpleLightbox from 'simplelightbox';
+import 'simplelightbox/dist/simple-lightbox.min.css';
 
 const searchForm = document.querySelector('.search-form');
 const gallery = document.querySelector('.gallery');
 const loadMoreBtn = document.querySelector('.load-more');
 
 const Pixabay = new API_service();
-
-//loadMoreBtn.addEventListener('click', loadMoreData);
+const lightbox = new SimpleLightbox('.gallery a');
 
 const searchRequest = event => {
   event.preventDefault();
@@ -26,6 +26,7 @@ const searchRequest = event => {
         );
       } else {
         renderData(hits);
+        lightbox.refresh();
         loadMoreBtn.classList.remove('hidden');
         return Notify.success(`Hooray! We found ${totalHits} images.`);
       }
@@ -57,3 +58,7 @@ const renderData = array => {
   });
   gallery.insertAdjacentHTML('beforeEnd', renderedItems);
 };
+
+
+
+loadMoreBtn.addEventListener('click', loadMoreData);
