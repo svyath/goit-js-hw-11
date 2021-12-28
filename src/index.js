@@ -74,7 +74,11 @@ const loadMoreData = () => {
     counter += hits.length;
     pageScroll();
     if (counter >= totalHits) {
-      Notify.warning('We are sorry, but you have reached the end of search results.');
+      window.onscroll = () => {
+        if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {
+          Notify.info("We're sorry, but you've reached the end of search results.");
+        }
+      };
       loadMoreBtn.classList.add('hidden');
     }
   });
