@@ -69,13 +69,18 @@ const renderData = array => {
 
 const loadMoreData = () => {
   Pixabay.fetchData().then(({ totalHits, hits }) => {
+    const totalPages = Math.ceil(totalHits / Pixabay.imagePerPage);
+
     renderData(hits);
     lightbox.refresh();
     counter += hits.length;
     pageScroll();
     if (counter >= totalHits) {
       window.onscroll = () => {
-        if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {
+        if (
+          window.innerHeight + window.pageYOffset >= document.body.offsetHeight &&
+          Pixabay.page > totalPages
+        ) {
           Notify.info("We're sorry, but you've reached the end of search results.");
         }
       };
