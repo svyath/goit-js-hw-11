@@ -23,16 +23,19 @@ const searchRequest = event => {
     gallery.innerHTML = '';
     Pixabay.resetPage();
     Pixabay.fetchData().then(({ totalHits, hits }) => {
+      counter = 0;
       counter += hits.length;
+      renderData(hits);
+      lightbox.refresh();
       if (totalHits === 0) {
         return Notify.failure(
           'Sorry, there are no images matching your search query. Please try again.',
         );
+      } else if (totalHits <= 40 && totalHits >= 1) {
+        loadMoreBtn.classList.add('hidden');
+        return Notify.success(`Hooray! We found ${totalHits} images.`);
       } else {
-        renderData(hits);
-        lightbox.refresh();
         loadMoreBtn.classList.remove('hidden');
-
         return Notify.success(`Hooray! We found ${totalHits} images.`);
       }
     });
